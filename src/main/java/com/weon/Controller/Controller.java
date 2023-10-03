@@ -29,19 +29,19 @@ public class Controller {
 
     //Metodo para consumir as mensagens
     public void consume(Message message){
-        //Caso a mensagem seja maior que ou igual a 3000 é uma mensagem de voz
-        if (message.getId()>=3000) {
+        //Caso a mensagem seja maior que ou igual a 30000 é uma mensagem de voz
+        if (message.getId()>=30000) {
             Voz voz = new Voz(message.getId(),message.getOrigin(), message.getDestination(), message.getDate());
             vozDAO.consumeVoz(voz);
         }
-        //caso a mensagem seja menor q 3000 e mais ou igual a 2000 é uma mensagem de Email
-        if (message.getId()<3000 && message.getId()>=2000 ) {
+        //caso a mensagem seja menor que 3000 e mais ou igual a 20000 é uma mensagem de Email
+        if (message.getId()<30000 && message.getId()>=20000 ) {
             Email email = new Email(message.getId(), message.getOrigin(), message.getDestination(), message.getDate());
             emailDAO.consumeEmail(email);
         }
 
-        //caso a mensagem seja menor que 2000
-        if (message.getId()<2000) {
+        //caso a mensagem seja menor que 20000
+        if (message.getId()<20000) {
             Chat chat = new Chat(message.getId(), message.getOrigin(), message.getDestination(), message.getDate());
             chatDAO.consumeChat(chat);
         }

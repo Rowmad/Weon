@@ -13,7 +13,7 @@ public class VozMessage implements Message {
 	/*Uso do construtor para especificar os valores de para o tipo mensagem de voz,
 	 *nesse caso os Ids estarao entre 3000 e 3999*/
 	public VozMessage(int id) {
-		this.id = 3000+id;
+		this.id = 30000+id;
 		this.telefoneOrigem = this.id+"-"+this.id;
 		this.telefoneDestino = this.id+"-"+this.id;
 		this.data = LocalDate.now();

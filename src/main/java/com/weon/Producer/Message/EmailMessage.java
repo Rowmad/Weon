@@ -13,7 +13,7 @@ public class EmailMessage implements Message {
 	/*Uso do construtor para especificar os valores de para o tipo Email,
 	 *nesse caso os Ids estarao entre 2000 e 2999*/
 	public EmailMessage(int id) {
-		this.id = 2000+id;
+		this.id = 20000+id;
 		this.emailOrigem = "origem_"+id+"@email.com";
 		this.emailDestino = "destino_"+id+"@email.com";
 		this.data = LocalDate.now();
