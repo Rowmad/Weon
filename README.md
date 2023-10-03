@@ -30,4 +30,12 @@ A geração de mensagens é gerenciada pela classe MessageFactory o metodo gener
 A produção ira se iniciar quando uma thread for criada atraves da classe Producer, nessa classe um numero aleatorio entre 0 e 2 é gerado para criar uma mensagem com um tipo determinado de forma aleatoria, as mensagens são criadas ate a fila que é gerenciada pela classe MessageQueue estar cheia.  
 
 ### Consumidores
-Serão consumidas 3 tipos de mensagem to tipo Chat, Email e Voz, cada tipo de mensagem tera uma classe que implementa uma interface diferente, o consumo de mensagens foi interpretado como uma possivel interação com o banco de dados, considerando cada tipo de mensagem como uma tabela diferente, por isso nesse caso cada tipo tem uma interface diferente. 
+Serão consumidas 3 tipos de mensagem to tipo Chat, Email e Voz, cada tipo de mensagem tera uma classe que implementa uma interface diferente, o consumo de mensagens foi interpretado como uma possivel interação com o banco de dados, considerando cada tipo de mensagem como uma tabela diferente, por isso nesse caso cada tipo tem uma interface diferente. Cada mensagem sera consumida da seguinte forma:
+* Mensagens do tipo Chat serão consumidas pela classe ChatDAOImpl que implementa a interface ChatDAO e consome um objeto do tipo Chat, modelo que esta presente na pasta Model.
+* Mensagens do tipo Email serão consumidas pela classe EmailDAOImpl que implementa a interface EmailDAO e consome um objeto do tipo Email, modelo que esta presente na pasta Model.
+* Mensagens do tipo Chat serão consumidas pela classe VozDAOImpl que implementa a interface VozDAO e consome um objeto do tipo Voz, modelo que esta presente na pasta Model.
+
+O controle do consumo de mensagens é implementado pela classe Controle, que baseado no valor Id, como citado na criação das mensagens caso o valor do Id esteja entre 10000 e 19999 ira consumir uma mensagem do tipo chat, caso o id estaja 20000 e 29999 ira consumir uma mensagem do tipo email e caso o Id seja maior que 30000 ira consumir uma mensagem do tipo voz.
+
+O consumo de mensagens ira se iniciar quando uma thread for criada atraves da classe Consumer, esse classe ira chamar um metodo para retirar uma mensagem da fila, e caso o valor seja diferente de null ira chamar a classe Controle para definir o tipo de consumo que sera realizado. O consumidor ira consumir enquanto a fila não estiver cheia, pois ainda haverão mensagens a serem produzidas ou enquanto houverm mensagens a serem consumidas.
+
